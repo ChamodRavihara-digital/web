@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chamod Ravihara | Performance Marketer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-deep: #060b18;
+      --bg-section: #0d1525;
+      --bg-card: #0e1628;
+      --bg-card-hover: #131e35;
+      --blue: #2563eb;
+      --blue-light: #3b82f6;
+      --blue-glow: rgba(37,99,235,0.18);
+      --text: #e8edf8;
+      --text-muted: #7a8ba8;
+      --text-dim: #4a5a72;
+      --border: rgba(255,255,255,0.07);
+      --border-blue: rgba(37,99,235,0.35);
+      --white-bg: #ffffff;
+      --white-bg2: #f7f9fc;
+      --white-text: #0d1525;
+      --white-muted: #4a5a72;
+      --white-border: #e2e8f0;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-deep); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg-deep); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; height: 68px;
+      background: rgba(6,11,24,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+    .nav-logo img { height: 38px; width: 38px; object-fit: contain; }
+    .nav-logo span { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 0.875rem; font-weight: 400; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; padding: 8px 20px !important; border-radius: 100px; font-weight: 600 !important; font-size: 0.85rem !important; transition: background 0.2s, transform 0.15s !important; }
+    .nav-cta:hover { background: var(--blue-light) !important; transform: translateY(-1px); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
+    .nav-burger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 110px 6% 70px; background: var(--bg-deep);
+      position: relative; overflow: hidden;
+    }
+    #hero::before { content: ''; position: absolute; width: 800px; height: 800px; background: radial-gradient(circle, rgba(37,99,235,0.13) 0%, transparent 68%); top: -160px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+    #hero::after  { content: ''; position: absolute; width: 420px; height: 420px; background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%); bottom: 0; right: 8%; pointer-events: none; }
+
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border-blue); background: rgba(37,99,235,0.08); padding: 6px 18px; border-radius: 100px; font-size: 0.82rem; color: var(--blue-light); margin-bottom: 28px; animation: fadeUp 0.7s ease both; }
+    .hero-badge .dot { width: 7px; height: 7px; background: #22d45e; border-radius: 50%; display: inline-block; animation: blink 2s ease infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+    h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 800; line-height: 1.07; letter-spacing: -0.03em; margin-bottom: 22px; animation: fadeUp 0.7s 0.1s ease both; }
+    h1 .accent { color: var(--blue-light); }
+    .hero-sub { font-size: clamp(1rem, 2vw, 1.16rem); color: var(--text-muted); max-width: 580px; line-height: 1.78; margin-bottom: 40px; animation: fadeUp 0.7s 0.2s ease both; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.7s 0.3s ease both; }
+
+    .btn-primary { background: var(--blue); color: #fff; padding: 12px 28px; border-radius: 100px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; display: inline-block; }
+    .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,99,235,0.38); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.2); padding: 12px 28px; border-radius: 100px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: border-color 0.2s, background 0.2s, transform 0.15s; display: inline-block; }
+    .btn-outline:hover { border-color: var(--blue); background: var(--blue-glow); transform: translateY(-2px); }
+    .btn-dark { background: var(--blue); color: #fff; padding: 12px 28px; border-radius: 100px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; display: inline-block; }
+    .btn-dark:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,99,235,0.3); }
+
+    /* SECTION SHARED */
+    section { padding: 90px 6%; }
+    .section-label { display: inline-block; border: 1px solid var(--border-blue); color: var(--blue-light); font-size: 0.76rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 16px; }
+    .section-label-w { display: inline-block; border: 1px solid rgba(37,99,235,0.3); color: var(--blue); font-size: 0.76rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 16px; }
+    .section-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 14px; }
+    .section-title .accent { color: var(--blue-light); }
+    .section-title-w { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 14px; color: var(--white-text); }
+    .section-title-w .accent { color: var(--blue); }
+    .section-sub { color: var(--text-muted); font-size: 1rem; max-width: 560px; line-height: 1.75; }
+    .section-sub-w { color: var(--white-muted); font-size: 1rem; max-width: 560px; line-height: 1.75; }
+
+    /* ABOUT — white */
+    #about { background: var(--white-bg); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .about-text p { color: var(--white-muted); line-height: 1.85; font-size: 1.02rem; margin-bottom: 22px; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .stat-box { background: var(--white-bg2); border: 1px solid var(--white-border); border-radius: 16px; padding: 24px; transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
+    .stat-box:hover { border-color: rgba(37,99,235,0.3); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,99,235,0.08); }
+    .stat-box .num { font-family: 'Bricolage Grotesque', sans-serif; font-size: 2rem; font-weight: 800; color: var(--blue); }
+    .stat-box .label { font-size: 0.82rem; color: var(--white-muted); margin-top: 4px; }
+
+    /* CASE STUDIES — dark */
+    #work { background: var(--bg-deep); }
+    .work-wrap { max-width: 1100px; margin: 0 auto; }
+    .work-header { margin-bottom: 48px; }
+    .work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .case-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px 28px; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+    .case-card:hover { border-color: var(--border-blue); transform: translateY(-5px); box-shadow: 0 16px 48px rgba(37,99,235,0.12); }
+    .case-tag { display: inline-block; background: var(--blue-glow); border: 1px solid var(--border-blue); color: var(--blue-light); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+    .case-client { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.22rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .case-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 22px; }
+    .case-metrics { display: flex; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 20px; }
+    .metric { background: rgba(37,99,235,0.07); border: 1px solid rgba(37,99,235,0.15); border-radius: 10px; padding: 10px 16px; flex: 1; min-width: 80px; }
+    .metric .val { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.28rem; font-weight: 800; color: var(--blue-light); }
+    .metric .key { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+    /* SERVICES — white */
+    #services { background: var(--white-bg); }
+    .services-wrap { max-width: 1100px; margin: 0 auto; }
+    .services-header { margin-bottom: 48px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .service-card { background: var(--white-bg2); border: 1px solid var(--white-border); border-radius: 18px; padding: 28px; transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
+    .service-card:hover { border-color: rgba(37,99,235,0.3); transform: translateY(-4px); box-shadow: 0 10px 32px rgba(37,99,235,0.08); }
+    .service-icon { width: 48px; height: 48px; background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 18px; }
+    .service-name { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.05rem; font-weight: 700; letter-spacing: -0.02em; color: var(--white-text); margin-bottom: 10px; }
+    .service-desc { color: var(--white-muted); font-size: 0.88rem; line-height: 1.7; }
+
+    /* CERTIFICATIONS — dark scroll banner */
+    #certs { background: var(--bg-deep); padding: 80px 0; overflow: hidden; }
+    .certs-header { text-align: center; padding: 0 6%; margin-bottom: 52px; }
+
+    .cert-track-wrapper { position: relative; overflow: hidden; }
+    .cert-track-wrapper::before,
+    .cert-track-wrapper::after { content: ''; position: absolute; top: 0; bottom: 0; width: 140px; z-index: 2; }
+    .cert-track-wrapper::before { left: 0; background: linear-gradient(to right, var(--bg-deep), transparent); }
+    .cert-track-wrapper::after  { right: 0; background: linear-gradient(to left,  var(--bg-deep), transparent); }
+
+    .cert-track { display: flex; gap: 20px; width: max-content; padding: 4px 0; animation: scrollL 20s linear infinite; }
+    .cert-track:hover { animation-play-state: paused; }
+    @keyframes scrollL { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    .cert-pill { display: flex; align-items: center; gap: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px; padding: 14px 26px; white-space: nowrap; transition: border-color 0.25s; cursor: default; }
+    .cert-pill:hover { border-color: var(--border-blue); }
+    .cert-logo-emoji { width: 38px; height: 38px; border-radius: 50%; background: var(--blue-glow); border: 1px solid var(--border-blue); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .cert-issuer { font-size: 0.7rem; color: var(--blue-light); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .cert-name   { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-top: 2px; }
+
+    /* CONTACT — white */
+    #contact { background: var(--white-bg); text-align: center; }
+    .contact-wrap { max-width: 680px; margin: 0 auto; }
+    .contact-cards { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 0 auto 38px; }
+    .contact-card { background: var(--white-bg2); border: 1px solid var(--white-border); border-radius: 16px; padding: 18px 22px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--white-text); font-size: 0.9rem; min-width: 200px; transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s; }
+    .contact-card:hover { border-color: rgba(37,99,235,0.35); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,99,235,0.1); }
+    .contact-card .cicon { width: 38px; height: 38px; background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-card .clabel { font-size: 0.7rem; color: var(--white-muted); margin-bottom: 2px; }
+    .contact-card .cval { font-weight: 600; }
+
+    /* FOOTER */
+    footer { background: var(--bg-deep); border-top: 1px solid var(--border); text-align: center; padding: 28px 6%; color: var(--text-dim); font-size: 0.82rem; }
+    footer a { color: var(--blue-light); text-decoration: none; }
+
+    /* DIVIDERS */
+    .div-dark  { height: 1px; background: linear-gradient(90deg, transparent, var(--border-blue), transparent); max-width: 1100px; margin: 0 auto; }
+    .div-light { height: 1px; background: linear-gradient(90deg, transparent, rgba(37,99,235,0.15), transparent); max-width: 1100px; margin: 0 auto; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 68px; left: 0; right: 0; background: rgba(6,11,24,0.97); padding: 24px 6%; gap: 20px; border-bottom: 1px solid var(--border); z-index: 99; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .work-grid  { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">
+    <img src="logo.png" alt="Chamod Ravihara" onerror="this.style.display='none'">
+    <span>Chamod Ravihara</span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#hero">Home</a>
+    <a href="#about">About Me</a>
+    <a href="#services">Services</a>
+    <a href="#work">Case Studies</a>
+    <a href="mailto:chamoravihara@gmail.com" class="nav-cta">Book a Call</a>
+  </div>
+  <button class="nav-burger" id="burger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO (dark) -->
+<section id="hero">
+  <div class="hero-badge"><span class="dot"></span>Available for new projects</div>
+  <h1>Digital Marketing<br>with a <span class="accent">Human Touch</span></h1>
+  <p class="hero-sub">
+    Results-driven Performance Marketer specialising in Meta, TikTok &amp; Google Ads.
+    I help brands scale through data-backed strategies that drive measurable ROI.
+  </p>
+  <div class="hero-btns">
+    <a href="mailto:chamoravihara@gmail.com" class="btn-primary">Book a Consultation</a>
+    <a href="#work" class="btn-outline">View Case Studies</a>
+  </div>
+</section>
+
+<!-- ABOUT (white) -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <div class="section-label-w">About Me</div>
+      <h2 class="section-title-w">Performance<br><span class="accent">Meets Purpose</span></h2>
+      <p>
+        I'm Chamod Ravihara — a results-driven Digital Marketer specialising in performance
+        advertising and social media growth. With a focus on ROI, I help brands scale through
+        data-backed strategies across Meta, TikTok and Google Ads.
+      </p>
+      <p>
+        From pixel-perfect tracking setups to full-funnel campaign architecture, I'm passionate
+        about driving measurable impact through innovative digital solutions that connect brands
+        with real people.
+      </p>
+      <a href="mailto:chamoravihara@gmail.com" class="btn-dark">Let's Work Together</a>
+    </div>
+    <div class="about-stats fade-up">
+      <div class="stat-box">
+        <div class="num">35+</div>
+        <div class="label">Brands Scaled</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">4+</div>
+        <div class="label">Years Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">4</div>
+        <div class="label">Countries</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">🇱🇰 🇦🇺 🇲🇻 🇮🇳</div>
+        <div class="label">Sri Lanka · Australia · Maldives · India</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-light"></div>
+
+<!-- CASE STUDIES (dark) -->
+<section id="work">
+  <div class="work-wrap">
+    <div class="work-header fade-up">
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">Real Results, <span class="accent">Real Impact</span></h2>
+      <p class="section-sub">A selection of campaigns that drove measurable growth for clients across multiple industries.</p>
+    </div>
+    <div class="work-grid">
+      <div class="case-card fade-up">
+        <div class="case-tag">E-Commerce</div>
+        <div class="case-client">Anythingatsupun.lk</div>
+        <div class="case-desc">Full-funnel Meta advertising strategy — from prospecting to retargeting — with Pixel setup, dynamic product ads, and conversion optimisation.</div>
+        <div class="case-metrics">
+          <div class="metric"><div class="val">3.2×</div><div class="key">ROAS</div></div>
+          <div class="metric"><div class="val">+64%</div><div class="key">Revenue</div></div>
+          <div class="metric"><div class="val">-38%</div><div class="key">CPA</div></div>
+        </div>
+      </div>
+      <div class="case-card fade-up">
+        <div class="case-tag">Brand Awareness</div>
+        <div class="case-client">Supun Group of Companies</div>
+        <div class="case-desc">Multi-platform brand awareness campaign — building brand recall and audience growth through targeted Meta campaigns.</div>
+        <div class="case-metrics">
+          <div class="metric"><div class="val">+120%</div><div class="key">Reach</div></div>
+          <div class="metric"><div class="val">+85%</div><div class="key">Engagement</div></div>
+        </div>
+      </div>
+      <div class="case-card fade-up">
+        <div class="case-tag">Lead Generation</div>
+        <div class="case-client">International University Hub</div>
+        <div class="case-desc">Lead generation for prospective students — Meta Lead Ads with advanced audience segmentation and API-based lead tracking.</div>
+        <div class="case-metrics">
+          <div class="metric"><div class="val">-52%</div><div class="key">CPL</div></div>
+          <div class="metric"><div class="val">4×</div><div class="key">Leads</div></div>
+        </div>
+      </div>
+      <div class="case-card fade-up">
+        <div class="case-tag">Brand &amp; Sales</div>
+        <div class="case-client">Jayarathna Group</div>
+        <div class="case-desc">Combined brand awareness and sales conversion — custom audiences, lookalike audiences, and value-based optimisation.</div>
+        <div class="case-metrics">
+          <div class="metric"><div class="val">+95%</div><div class="key">Sales</div></div>
+          <div class="metric"><div class="val">2.8×</div><div class="key">ROAS</div></div>
+        </div>
+      </div>
+      <div class="case-card fade-up">
+        <div class="case-tag">E-Commerce</div>
+        <div class="case-client">Apex.lk</div>
+        <div class="case-desc">E-commerce performance campaign with full Conversions API, dynamic ads, and catalogue sales for scalable revenue growth.</div>
+        <div class="case-metrics">
+          <div class="metric"><div class="val">4.1×</div><div class="key">ROAS</div></div>
+          <div class="metric"><div class="val">+78%</div><div class="key">Orders</div></div>
+        </div>
+      </div>
+      <div class="case-card fade-up">
+        <div class="case-tag">Freelance</div>
+        <div class="case-client">WeGotDigital</div>
+        <div class="case-desc">Multi-client digital marketing management — social strategy, paid advertising, and content planning across diverse verticals.</div>
+        <div class="case-metrics">
+          <div class="metric"><div class="val">5+</div><div class="key">Clients</div></div>
+          <div class="metric"><div class="val">+110%</div><div class="key">Growth</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-dark"></div>
+
+<!-- SERVICES (white) -->
+<section id="services">
+  <div class="services-wrap">
+    <div class="services-header fade-up">
+      <div class="section-label-w">Services</div>
+      <h2 class="section-title-w">How I Can <span class="accent">Help You Grow</span></h2>
+      <p class="section-sub-w">End-to-end digital marketing solutions tailored to your business goals.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">📘</div>
+        <div class="service-name">Social Media Management</div>
+        <div class="service-desc">Full-service social media management including content planning, scheduling, community engagement, and performance reporting.</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🎯</div>
+        <div class="service-name">Meta Advertising — Advanced</div>
+        <div class="service-desc">Complete Meta Ads setup including page claiming, portfolio configuration, Pixel &amp; Conversions API integration for accurate tracking and scaling.</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🎵</div>
+        <div class="service-name">TikTok Advertising</div>
+        <div class="service-desc">Performance-driven TikTok ad campaigns crafted for engagement and conversions — from creative strategy to campaign management.</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🌐</div>
+        <div class="service-name">Website Development</div>
+        <div class="service-desc">Budget-friendly, conversion-optimised websites that load fast, look great, and support your marketing campaigns.</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">🔍</div>
+        <div class="service-name">Google Advertising</div>
+        <div class="service-desc">Google Search, Display &amp; Shopping campaigns with strategic keyword targeting, bid management, and ongoing optimisation.</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon">📈</div>
+        <div class="service-name">SEO</div>
+        <div class="service-desc">On-page and off-page SEO to improve organic visibility, drive qualified traffic, and grow your brand long-term.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS — dark auto-scroll banner -->
+<section id="certs">
+  <div class="certs-header fade-up">
+    <div class="section-label">Certifications</div>
+    <h2 class="section-title">Backed by <span class="accent">Recognised Credentials</span></h2>
+  </div>
+  <div class="cert-track-wrapper">
+    <div class="cert-track">
+      <!-- Set 1 -->
+      <div class="cert-pill">
+        <div class="cert-logo-emoji">🏅</div>
+        <div><div class="cert-issuer">HubSpot</div><div class="cert-name">Social Media Marketing</div></div>
+      </div>
+      <div class="cert-pill">
+        <div class="cert-logo-emoji">🎓</div>
+        <div><div class="cert-issuer">Google</div><div class="cert-name">Google Ads — Measurement</div></div>
+      </div>
+      <div class="cert-pill">
+        <div class="cert-logo-emoji">⚡</div>
+        <div><div class="cert-issuer">Google</div><div class="cert-name">AI-Powered Performance Ads</div></div>
+      </div>
+      <div class="cert-pill">
+        <div class="cert-logo-emoji">📜</div>
+        <div><div class="cert-issuer">Emind Academy</div><div class="cert-name">Practical Digital Marketing</div></div>
+      </div>
+      <!-- Set 2 (duplicate for seamless loop) -->
+      <div class="cert-pill">
+        <div class="cert-logo-emoji">🏅</div>
+        <div><div class="cert-issuer">HubSpot</div><div class="cert-name">Social Media Marketing</div></div>
+      </div>
+      <div class="cert-pill">
+        <div class="cert-logo-emoji">🎓</div>
+        <div><div class="cert-issuer">Google</div><div class="cert-name">Google Ads — Measurement</div></div>
+      </div>
+      <div class="cert-pill">
+        <div class="cert-logo-emoji">⚡</div>
+        <div><div class="cert-issuer">Google</div><div class="cert-name">AI-Powered Performance Ads</div></div>
+      </div>
+      <div class="cert-pill">
+        <div class="cert-logo-emoji">📜</div>
+        <div><div class="cert-issuer">Emind Academy</div><div class="cert-name">Practical Digital Marketing</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT (white) -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="section-label-w fade-up">Get In Touch</div>
+    <h2 class="section-title-w fade-up">Ready to <span class="accent">Scale Your Brand?</span></h2>
+    <p class="section-sub-w fade-up" style="margin:16px auto 38px;">
+      Let's talk about your goals. Book a free consultation and find out how data-backed digital marketing can transform your business.
+    </p>
+    <div class="contact-cards fade-up">
+      <a href="mailto:chamoravihara@gmail.com" class="contact-card">
+        <div class="cicon">✉️</div>
+        <div><div class="clabel">Email</div><div class="cval">chamoravihara@gmail.com</div></div>
+      </a>
+      <a href="tel:+94770675710" class="contact-card">
+        <div class="cicon">📞</div>
+        <div><div class="clabel">Phone</div><div class="cval">+94 770 675 710</div></div>
+      </a>
+      <a href="https://linkedin.com/in/chamod-ravihara/" target="_blank" class="contact-card">
+        <div class="cicon">💼</div>
+        <div><div class="clabel">LinkedIn</div><div class="cval">chamod-ravihara</div></div>
+      </a>
+    </div>
+    <a href="mailto:chamoravihara@gmail.com" class="btn-dark fade-up">📅 Book a Consultation</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Chamod Ravihara &nbsp;·&nbsp; Digital Marketing with a Human Touch &nbsp;·&nbsp;
+    <a href="mailto:chamoravihara@gmail.com">chamoravihara@gmail.com</a>
+  </p>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
